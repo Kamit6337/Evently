@@ -1,8 +1,11 @@
 import { Button } from "@components/ui/button";
+import connectToDatabase from "@utils/connectToDatabase";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  await connectToDatabase();
+
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">

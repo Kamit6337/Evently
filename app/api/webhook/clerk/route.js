@@ -2,6 +2,7 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { createUser, deleteUser, updateUser } from "@lib/actions/user";
 import environment from "@utils/environment";
+import User from "@models/user";
 
 export async function POST(req) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -58,19 +59,26 @@ export async function POST(req) {
 
   // MARK: CREATE NEW USER IN DATABASE WHEN USER LOGGED IN
   if (eventType === "user.created") {
-    const { id, email_addresses, image_url, first_name, last_name, username } =
-      evt.data;
+    const { id, email_addresses, image_url, first_name, last_name } = evt.data;
 
-    const user = {
+    const user = await User.findOne({
+      clerkId: id,
+    });
+
+    if (user) {
+      const findUser = JSON.parse(JSON.stringify(user));
+      return NextResponse.json({ message: "OK", user: findUser });
+    }
+
+    const userObj = {
       clerkId: id,
       email: email_addresses[0].email_address,
-      username: username,
       firstName: first_name,
       lastName: last_name,
       photo: image_url,
     };
 
-    const newUser = await createUser(user);
+    const newUser = await createUser(userObj);
 
     // MARK: MAKE CLERT SESSION (TOKEN) BY PUTTING NEW USER _ID INTO CLERK CLIENT
     // if (newUser) {
@@ -86,12 +94,11 @@ export async function POST(req) {
 
   // MARK: UPDATE USER WHEN USER MAKES ANY CHANGES
   if (eventType === "user.updated") {
-    const { id, image_url, first_name, last_name, username } = evt.data;
+    const { id, image_url, first_name, last_name } = evt.data;
 
     const user = {
       firstName: first_name,
       lastName: last_name,
-      username: username,
       photo: image_url,
     };
 
