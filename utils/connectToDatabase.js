@@ -12,10 +12,7 @@ const connectToDatabase = async () => {
   }
 
   try {
-    mongoose.connect(environment.MONGODB_URI, {
-      bufferCommands: false,
-      dbName: "Evently",
-    });
+    mongoose.connect(environment.MONGODB_URI);
     mongoose.connection.on("connected", () => {
       console.log("Connected to MongoDB");
       isDatabaseConnected = true;

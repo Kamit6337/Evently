@@ -2,8 +2,6 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { createUser, deleteUser, updateUser } from "@lib/actions/user";
 import environment from "@utils/environment";
-import User from "@models/user";
-import connectToDatabase from "@utils/connectToDatabase";
 
 export async function POST(req) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -61,17 +59,6 @@ export async function POST(req) {
   // MARK: CREATE NEW USER IN DATABASE WHEN USER LOGGED IN
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name } = evt.data;
-
-    await connectToDatabase();
-
-    const user = await User.findOne({
-      clerkId: id,
-    });
-
-    if (user) {
-      const findUser = JSON.parse(JSON.stringify(user));
-      return NextResponse.json({ message: "OK", user: findUser });
-    }
 
     const userObj = {
       clerkId: id,
