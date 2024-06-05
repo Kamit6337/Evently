@@ -2,6 +2,7 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { createUser, deleteUser, updateUser } from "@lib/actions/user";
 import environment from "@utils/environment";
+import { clerkClient } from "@clerk/nextjs/server";
 
 export async function POST(req) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -71,13 +72,14 @@ export async function POST(req) {
     const newUser = await createUser(userObj);
 
     // MARK: MAKE CLERT SESSION (TOKEN) BY PUTTING NEW USER _ID INTO CLERK CLIENT
-    // if (newUser) {
-    //   await clerkClient.users.updateUserMetadata(id, {
-    //     publicMetadata: {
-    //       userId: newUser._id,
-    //     },
-    //   });
-    // }
+    if (newUser) {
+      const updateResponse = await clerkClient.users.updateUserMetadata(id, {
+        publicMetadata: {
+          userId: newUser._id,
+        },
+      });
+      console.log("Metadata update response:", updateResponse);
+    }
 
     return NextResponse.json({ message: "OK", user: newUser });
   }
