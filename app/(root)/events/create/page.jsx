@@ -1,11 +1,12 @@
 import EventForm from "@components/shared/EventForm";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import getCookieUser from "@utils/auth/getCookieUser";
 
 const CreateEvent = async () => {
-  const { userId } = getCookieUser();
+  const { sessionClaims } = auth();
 
-  console.log("userId", userId);
+  console.log("sessionClaims", sessionClaims);
+
+  const userId = sessionClaims?.userId;
 
   return (
     <>

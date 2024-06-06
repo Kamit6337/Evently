@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import { createUser, deleteUser, updateUser } from "@lib/actions/user";
 import environment from "@utils/environment";
 import { clerkClient } from "@clerk/nextjs/server";
-import setCookies from "@utils/auth/setCookies";
 
 export async function POST(req) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -75,7 +74,11 @@ export async function POST(req) {
     // MARK: MAKE CLERT SESSION (TOKEN) BY PUTTING NEW USER _ID INTO CLERK CLIENT
     if (newUser) {
       console.log("newUser", newUser);
-      setCookies({ userId: newUser._id });
+      await clerkClient.users.updateUserMetadata(id, {
+        publicMetadata: {
+          userId: newUser._id,
+        },
+      });
     }
 
     return NextResponse.json({ message: "OK", user: newUser });
@@ -92,11 +95,6 @@ export async function POST(req) {
     };
 
     const updatedUser = await updateUser(id, user);
-
-    if (updatedUser) {
-      console.log("newUser", updatedUser);
-      setCookies({ userId: updatedUser._id });
-    }
 
     return NextResponse.json({ message: "OK", user: updatedUser });
   }
