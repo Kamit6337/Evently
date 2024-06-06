@@ -16,7 +16,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Dropdown from "./DropDown";
 import { Textarea } from "@components/ui/textarea";
 import "react-datepicker/dist/react-datepicker.css";
 import ReactDatePicker from "react-datepicker";
@@ -25,6 +24,7 @@ import { FileUploader } from "./FileUploader";
 import { useState } from "react";
 import { useUploadThing } from "@lib/uploadthing";
 import { createEvent, updateEvent } from "@lib/actions/event";
+import Dropdown from "./Dropdown";
 
 const EventForm = ({ userId, type, event, eventId }) => {
   const [files, setFiles] = useState([]);
@@ -48,7 +48,6 @@ const EventForm = ({ userId, type, event, eventId }) => {
   async function onSubmit(values) {
     let uploadedImageUrl = values.imageUrl;
     console.log("image URL", values.imageUrl);
-
     if (files.length > 0) {
       const uploadedImages = await startUpload(files);
 

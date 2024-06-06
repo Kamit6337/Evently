@@ -75,7 +75,6 @@ export async function POST(req) {
     // MARK: MAKE CLERT SESSION (TOKEN) BY PUTTING NEW USER _ID INTO CLERK CLIENT
     if (newUser) {
       console.log("newUser", newUser);
-
       setCookies({ userId: newUser._id });
     }
 
