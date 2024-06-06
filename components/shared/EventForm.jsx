@@ -27,7 +27,10 @@ import { createEvent, updateEvent } from "@lib/actions/event";
 import Dropdown from "./Dropdown";
 
 const EventForm = ({ userId, type, event, eventId }) => {
+  const router = useRouter();
   const [files, setFiles] = useState([]);
+  const { startUpload } = useUploadThing("imageUploader");
+
   const initialValues =
     event && type === "Update"
       ? {
@@ -36,9 +39,6 @@ const EventForm = ({ userId, type, event, eventId }) => {
           endDateTime: new Date(event.endDateTime),
         }
       : eventDefaultValues;
-  const router = useRouter();
-
-  const { startUpload } = useUploadThing("imageUploader");
 
   const form = useForm({
     resolver: zodResolver(eventFormSchema),
@@ -47,7 +47,7 @@ const EventForm = ({ userId, type, event, eventId }) => {
 
   async function onSubmit(values) {
     let uploadedImageUrl = values.imageUrl;
-    console.log("image URL", values.imageUrl);
+
     if (files.length > 0) {
       const uploadedImages = await startUpload(files);
 
