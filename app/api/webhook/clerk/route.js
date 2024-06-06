@@ -93,6 +93,11 @@ export async function POST(req) {
 
     const updatedUser = await updateUser(id, user);
 
+    if (updatedUser) {
+      console.log("newUser", updatedUser);
+      setCookies({ userId: updatedUser._id });
+    }
+
     return NextResponse.json({ message: "OK", user: updatedUser });
   }
 
