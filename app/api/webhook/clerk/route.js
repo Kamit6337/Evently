@@ -113,7 +113,7 @@ export async function POST(req) {
 
     return new Response("", { status: 200 });
   } catch (error) {
-    console.log("Error in clerk login");
-    throw new Error("Error in clerk login");
+    console.log("Error in clerk login", error);
+    throw new Error("Error in clerk login", error);
   }
 }
