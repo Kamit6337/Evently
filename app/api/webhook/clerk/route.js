@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { createUser, deleteUser, updateUser } from "@lib/actions/user";
 import environment from "@utils/environment";
 import { clerkClient } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
