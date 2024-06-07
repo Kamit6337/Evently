@@ -5,14 +5,10 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
 import Checkout from "./Checkout";
+import useSessionUser from "@components/useSessionUser";
 
 const CheckoutButton = ({ event }) => {
-  const data = useUser();
-  const authData = useAuth();
-  console.log("data from checout button", data);
-  console.log("authData from checout button", authData);
-
-  const userId = data?.publicMetadata.userId;
+  const { userId } = useSessionUser();
   const hasEventFinished = new Date(event.endDateTime) < new Date();
 
   return (
