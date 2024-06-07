@@ -1,17 +1,18 @@
 "use client";
 
-import { SignedIn, SignedOut, useUser } from "@clerk/nextjs";
+import { SignedIn, SignedOut, useAuth, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
 import Checkout from "./Checkout";
 
 const CheckoutButton = ({ event }) => {
-  const { user } = useUser();
+  const data = useUser();
+  const authData = useAuth();
+  console.log("data from checout button", data);
+  console.log("authData from checout button", authData);
 
-  console.log("user", user);
-
-  const userId = user?.publicMetadata.userId;
+  const userId = data?.publicMetadata.userId;
   const hasEventFinished = new Date(event.endDateTime) < new Date();
 
   return (

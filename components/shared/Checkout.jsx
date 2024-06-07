@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-
 import { Button } from "../ui/button";
 import { checkoutOrder } from "@lib/actions/order";
 import environment from "@utils/environment";
