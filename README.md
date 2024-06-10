@@ -1,15 +1,15 @@
 # Evently
 
-<p>It's a Event Organising website where an Event is created and sell the ticket to attend the Event at mentioned place and time</p>
+<p>Evently is an event organizing website where users can create events and sell tickets for those events. Attendees can purchase tickets and attend the events at the specified place and time</p>
 
 <a href="https://evently-mu-cyan.vercel.app"><u>Live Website</u></a>
 
 <h1>Tech used : </h1>
 <ul>
-<li>Next JS - <i>Server Side Rendered React JS app</i></li>
-<li>Clerk - <i>for Google OAuth login</i></li>
-<li>shadcn/ui - <i>designing of web pages with less code</i></li>
-<li>MongoDB - <i>NoSQL databse to store user data</i></li>
-<li>React Hook Form - <i>form filling without re-rendering of pages</i></li>
-<li>Zod - <i>checking validation in form effectively</i></li>
+<li>Next JS - <i>Server-side rendered React.js application framework for building fast and scalable web applications.</i></li>
+<li>Clerk - <i>Provides user authentication with Google OAuth for secure login</i></li>
+<li>shadcn/ui - <i>Utilized for designing web pages efficiently with less code</i></li>
+<li>MongoDB - <i>A NoSQL database used to store user data, event details, and ticket information</i></li>
+<li>React Hook Form - <i>Facilitates form handling without the need for frequent page re-renders, improving performance</i></li>
+<li>Zod - <i>Used for form validation to ensure data integrity and correctness effectively</i></li>
 </ul>
