@@ -10,5 +10,6 @@
 <li>Clerk - <i>for Google OAuth login</i></li>
 <li>shadcn/ui - <i>designing of web pages with less code</i></li>
 <li>MongoDB - <i>NoSQL databse to store user data</i></li>
-<li>React Hook Form - <i>form filling and checking validation effectively</i></li>
+<li>React Hook Form - <i>form filling without re-rendering of pages</i></li>
+<li>Zod - <i>checking validation in form effectively</i></li>
 </ul>
