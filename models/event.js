@@ -19,6 +19,16 @@ const EventSchema = new Schema(
   }
 );
 
+EventSchema.pre("save", function (next) {
+  if (this.price === "") {
+    this.isFree = true;
+  } else {
+    this.isFree = false;
+  }
+
+  next();
+});
+
 const Event = models.Event || model("Event", EventSchema);
 
 export default Event;
