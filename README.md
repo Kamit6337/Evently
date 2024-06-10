@@ -1,6 +1,6 @@
 # Evently
 
-<p>It's a Event Organising website where an Event is created and sell the ticket to attend the Ecent at mentioned place and time</p>
+<p>It's a Event Organising website where an Event is created and sell the ticket to attend the Event at mentioned place and time</p>
 
 <a href="https://evently-mu-cyan.vercel.app"><u>Live Website</u></a>
 
